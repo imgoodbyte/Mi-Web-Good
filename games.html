@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Good Games — pequeños experimentos jugables creados por Antony Hurtado.">
+  <meta name="theme-color" content="#080b18">
+  <title>Good Games — Antony Hurtado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/games.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="orb orb--one" aria-hidden="true"></div>
+  <div class="orb orb--two" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Volver al portafolio">
+      <span class="brand__mark">G</span>
+      <span>Good</span>
+      <span class="brand__divider"></span>
+      <span class="brand__room">Games</span>
+    </a>
+    <a class="back-link" href="index.html">
+      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Portafolio
+    </a>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="games-title">
+      <div class="eyebrow"><span></span> Mi Laboratorio gaming</div>
+      <h1 id="games-title">¿Podrás vencer ,<br><em>a los ceros y unos?.</em></h1>
+      <p>Una vez oí: "Si puedes imaginarlo, puedes programarlo".</p>
+      <div class="intro__meta">
+        <span><strong>01</strong> juego disponible</span>
+        <span class="intro__line"></span>
+        <span>Curioso ✦</span>
+      </div>
+    </section>
+
+    <section class="library" aria-labelledby="library-title">
+      <div class="section-heading">
+        <div>
+          <span class="section-heading__index">01 / COLECCIÓN</span>
+          <h2 id="library-title">Elige una experiencia</h2>
+        </div>
+        <p>Más juegos aparecerán por aquí con el tiempo.</p>
+      </div>
+
+      <div class="game-grid">
+        <article class="game-card game-card--featured">
+          <div class="game-card__art" aria-hidden="true">
+            <div class="planet"><span></span></div>
+            <div class="orbit orbit--a"></div>
+            <div class="orbit orbit--b"></div>
+            <span class="spark spark--1"></span><span class="spark spark--2"></span><span class="spark spark--3"></span>
+            <div class="game-card__number">001</div>
+          </div>
+          <div class="game-card__content">
+            <div class="game-card__topline">
+              <span class="status"><i></i> Disponible</span>
+              <span class="duration">30 segundos</span>
+            </div>
+            <div>
+              <span class="game-card__genre">Reflejos · Arcade</span>
+              <h3>Pulso</h3>
+              <p>Persigue la luz antes de que desaparezca. Cada acierto acelera el ritmo.</p>
+            </div>
+            <button class="play-button" id="openGame" type="button">
+              Jugar ahora
+              <span aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 11 7-11 7V5Z"/></svg>
+              </span>
+            </button>
+          </div>
+        </article>
+
+        <article class="game-card game-card--soon" aria-label="Próximo juego, bloqueado">
+          <div class="soon-art" aria-hidden="true">
+            <span>?</span>
+            <div class="soon-art__ring"></div>
+          </div>
+          <div class="soon-copy">
+            <span>PRÓXIMAMENTE</span>
+            <h3>Algo nuevo se está cocinando.</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Good Games © 2026</p>
+    <p>Diseñado y desarrollado por Good.</p>
+  </footer>
+
+  <div class="game-modal" id="gameModal" aria-hidden="true">
+    <div class="game-modal__backdrop" data-close-game></div>
+    <section class="game-window" role="dialog" aria-modal="true" aria-labelledby="gameTitle">
+      <header class="game-window__bar">
+        <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="game-window__title"><i></i><span id="gameTitle">Pulso</span></div>
+        <button class="icon-button" type="button" data-close-game aria-label="Cerrar juego">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </header>
+
+      <div class="game-hud">
+        <div><span>PUNTOS</span><strong id="score">00</strong></div>
+        <div class="game-hud__message" id="gameMessage">Atrapa cada pulso de luz</div>
+        <div class="game-hud__time"><span>TIEMPO</span><strong id="time">30</strong></div>
+      </div>
+
+      <div class="arena" id="arena">
+        <div class="arena__grid" aria-hidden="true"></div>
+        <button class="target" id="target" type="button" aria-label="Atrapar pulso"></button>
+        <div class="game-start" id="gameStart">
+          <span class="game-start__icon">✦</span>
+          <h2>Pulso</h2>
+          <p>Haz clic en la luz tantas veces como puedas antes de que termine el tiempo.</p>
+          <button type="button" id="startGame">Comenzar</button>
+          <small>También puedes usar Tab + Enter</small>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="src/js/games.js"></script>
+</body>
+</html>

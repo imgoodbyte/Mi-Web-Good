@@ -1332,6 +1332,193 @@ img {
 }
 
 /* ==============================
+   GOOD GAMES INVITE
+   ============================== */
+.games-invite {
+  padding: 44px 0 120px;
+  background: var(--surface-1);
+}
+
+.games-invite__card {
+  position: relative;
+  min-height: 300px;
+  padding: 54px 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
+  align-items: center;
+  gap: 56px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(115, 97, 255, 0.28), transparent 28%),
+    linear-gradient(135deg, #0c1430 0%, #111128 52%, #18102b 100%);
+  box-shadow: 0 30px 70px rgba(30, 41, 90, 0.18);
+}
+
+.games-invite__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 0.7px, transparent 0.7px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 35%, #000);
+}
+
+.games-invite__copy,
+.games-invite__action {
+  position: relative;
+  z-index: 2;
+}
+
+.games-invite__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  color: rgba(224, 229, 255, 0.68);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.games-invite__eyebrow i,
+.games-invite__available i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6de2ae;
+  box-shadow: 0 0 12px #6de2ae;
+}
+
+.games-invite h2 {
+  margin-bottom: 16px;
+  color: #fff;
+  font-size: clamp(34px, 5vw, 52px);
+  letter-spacing: -0.045em;
+}
+
+.games-invite h2 em {
+  color: #a897ff;
+}
+
+.games-invite__copy p {
+  max-width: 580px;
+  color: rgba(222, 226, 245, 0.66);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.games-invite__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.games-invite__available {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  color: rgba(217, 223, 244, 0.62);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.games-invite__button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 9px 9px 9px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #14162a;
+  background: #f7f8ff;
+  font-size: 13px;
+  font-weight: 700;
+  transition:
+    transform var(--t-fast),
+    box-shadow var(--t-fast),
+    background var(--t-fast);
+}
+
+.games-invite__button > span {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #5d7bf5, #8c5add);
+  transition: transform var(--t-med) var(--ease);
+}
+
+.games-invite__button:hover {
+  background: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(93, 82, 222, 0.3);
+}
+
+.games-invite__button:hover > span {
+  transform: rotate(-12deg) translateX(2px);
+}
+
+.games-invite__ambient {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: -120px;
+  right: 15%;
+  pointer-events: none;
+}
+
+.games-invite__orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(164, 172, 255, 0.14);
+  border-radius: 50%;
+  animation: gamesOrbit 18s linear infinite;
+}
+
+.games-invite__orbit::after {
+  content: "";
+  position: absolute;
+  left: 33px;
+  bottom: 39px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9f8aff;
+  box-shadow: 0 0 16px #8471ff;
+}
+
+.games-invite__spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+.games-invite__spark--1 { top: 68%; left: -26%; }
+.games-invite__spark--2 { top: 84%; right: -12%; }
+.games-invite__spark--3 { top: 53%; right: 35%; opacity: 0.65; }
+
+@keyframes gamesOrbit {
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================
    CONTACT
    ============================== */
 .contact {
@@ -1705,6 +1892,19 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* Good Games */
+  .games-invite {
+    padding: 20px 0 80px;
+  }
+  .games-invite__card {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 42px 34px;
+  }
+  .games-invite__action {
+    max-width: 360px;
+  }
+
   /* Contact */
   .contact__wrapper {
     grid-template-columns: 1fr;
@@ -1741,5 +1941,21 @@ img {
   .btn-top {
     bottom: 20px;
     right: 20px;
+  }
+  .games-invite__card {
+    padding: 36px 24px;
+    border-radius: 24px;
+  }
+  .games-invite__action {
+    width: 100%;
+  }
+  .games-invite__button {
+    padding-left: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .games-invite__orbit {
+    animation: none;
   }
 }
