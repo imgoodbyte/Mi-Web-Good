@@ -88,6 +88,19 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto; position: relative
 .soon-art__ring::after { inset: -15px; }
 .soon-copy span { color: #626b86; font-size: 9px; font-weight: 800; letter-spacing: .18em; }
 .soon-copy h3 { margin: 10px 0 0; color: #8991a7; font-size: 17px; line-height: 1.45; letter-spacing: -.02em; }
+.game-card--turno { min-height: 440px; display: flex; flex-direction: column; color: inherit; transition: transform .35s var(--ease), border-color .35s, box-shadow .35s; }
+.game-card--turno:hover { transform: translateY(-6px); border-color: rgba(91,213,205,.35); box-shadow: 0 34px 80px rgba(0,0,0,.35), 0 0 45px rgba(46,161,171,.08); }
+.turno-art { min-height: 245px; position: relative; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 45%, rgba(39,104,117,.28), transparent 34%), linear-gradient(155deg,#101c2b,#090e19); }
+.turno-art::before { content:""; position:absolute; inset:0; opacity:.32; background-image: linear-gradient(rgba(96,197,199,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(96,197,199,.1) 1px,transparent 1px); background-size:28px 28px; }
+.turno-art__door { position:relative; width:92px; height:145px; display:grid; place-items:center; border:2px solid #385b69; border-radius:4px 4px 0 0; background:linear-gradient(90deg,#132731,#1d3540 48%,#10242d 50%); box-shadow:0 0 35px rgba(68,193,190,.12); }
+.turno-art__door::after { content:""; position:absolute; right:9px; width:6px; height:14px; border-radius:2px; background:#5fe0d5; box-shadow:0 0 12px #5fe0d5; }
+.turno-art__door span { color:#5d8b95; font:600 25px "IBM Plex Mono",monospace; }
+.turno-art__scan { position:absolute; left:0; right:0; top:30%; height:1px; background:linear-gradient(90deg,transparent,#5ed7d2,transparent); box-shadow:0 0 12px #4bbab8; animation:terminalScan 3.2s ease-in-out infinite; }
+.turno-art__time { position:absolute; right:18px; bottom:15px; color:#57747d; font:600 9px "IBM Plex Mono",monospace; letter-spacing:.12em; }
+.turno-copy { flex:1; padding:24px; display:flex; flex-direction:column; align-items:flex-start; background:linear-gradient(145deg,rgba(19,29,40,.98),rgba(12,17,28,.98)); }
+.turno-copy > div { width:100%; display:flex; justify-content:space-between; align-items:center; }.turno-copy > div span { color:#5f858e; font-size:8px; font-weight:800; letter-spacing:.14em; }.turno-copy > div i { width:6px;height:6px;border-radius:50%;background:#68dfb0;box-shadow:0 0 9px #68dfb0; }
+.turno-copy h3 { margin:13px 0 6px; font-family:"Instrument Serif",serif; font-size:34px; font-weight:400; }.turno-copy p { margin:0 0 24px; color:#84929f; font-size:12px; line-height:1.6; }.turno-copy strong { margin-top:auto; color:#c9d5db; font-size:11px; }.turno-copy strong b { margin-left:5px; color:#65d7d0; transition:margin .2s; }.game-card--turno:hover strong b { margin-left:10px; }
+@keyframes terminalScan { 0%,100% { top:26%; opacity:.3; } 50% { top:82%; opacity:1; } }
 
 footer { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 28px 0 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; color: #525b73; font-size: 11px; }
 
