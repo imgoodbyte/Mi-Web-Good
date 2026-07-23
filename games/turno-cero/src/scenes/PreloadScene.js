@@ -3,6 +3,18 @@ import Phaser from "phaser";
 export class PreloadScene extends Phaser.Scene {
   constructor() { super("PreloadScene"); }
 
+  preload() {
+    const { width, height } = this.scale;
+    this.add.text(width / 2, height / 2 - 42, "INICIALIZANDO PROTOCOLO", {
+      fontFamily: "IBM Plex Mono", fontSize: "11px", color: "#607393", letterSpacing: 3,
+    }).setOrigin(0.5);
+    const track = this.add.rectangle(width / 2, height / 2, 280, 2, 0x1a263e);
+    const bar = this.add.rectangle(width / 2 - 140, height / 2, 0, 2, 0x627eea).setOrigin(0, 0.5);
+    this.load.on("progress", (value) => bar.setDisplaySize(280 * value, 2));
+    this.load.on("complete", () => track.setFillStyle(0x4f68c8));
+    this.load.image("student-concept", "assets/images/player/student-concept-transparent.png");
+  }
+
   create() {
     const graphics = this.make.graphics({ x: 0, y: 0, add: false });
     graphics.fillStyle(0xc5d7ff).fillCircle(18, 18, 12);

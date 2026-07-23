@@ -62,12 +62,12 @@
           <div class="game-card__content">
             <div class="game-card__topline">
               <span class="status"><i></i> Disponible</span>
-              <span class="duration">30 segundos</span>
+              <span class="duration">Actualización 1 de agosto</span>
             </div>
             <div>
               <span class="game-card__genre">Reflejos · Arcade</span>
               <h3>Pulso</h3>
-              <p>Persigue la luz antes de que desaparezca. Cada acierto acelera el ritmo.</p>
+              <p>Encuentra a la ratita fugitiva antes de que vuelva a esconderse. Cada captura acelera el ritmo.</p>
             </div>
             <button class="play-button" id="openGame" type="button">
               Jugar ahora
@@ -84,13 +84,38 @@
             <span class="turno-art__scan"></span>
             <span class="turno-art__time">02:13 AM</span>
           </div>
-          <div class="turno-copy">
-            <div><span>PROTOTIPO 002 · PHASER</span><i></i></div>
-            <h3>Turno Cero</h3>
-            <p>Las puertas están bloqueadas. NORA dice que puede ayudarte.</p>
-            <strong>Entrar al Laboratorio 13 <b>→</b></strong>
+          <div class="game-card__content">
+            <div class="game-card__topline">
+              <span class="status"><i></i> Disponible</span>
+              <span class="duration">Actualización 1 de agosto</span>
+            </div>
+            <div>
+              <span class="game-card__genre">Sigilo · Terror ligero</span>
+              <h3>Turno Cero</h3>
+              <p>Las puertas están bloqueadas. NORA dice que puede ayudarte.</p>
+            </div>
+            <span class="play-button game-card__play">
+              Jugar ahora
+              <span aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 11 7-11 7V5Z"/></svg>
+              </span>
+            </span>
           </div>
         </a>
+
+        <article class="game-card game-card--soon" aria-label="Tercer juego, próximamente">
+          <div class="soon-art" aria-hidden="true">
+            <span>?</span>
+            <div class="soon-art__ring"></div>
+            <span class="soon-art__number">003</span>
+          </div>
+          <div class="soon-copy">
+            <div><span>EXPERIMENTO 003</span><i></i></div>
+            <h3>Próximamente</h3>
+            <p>Una nueva idea ocupará este espacio cuando llegue el momento.</p>
+            <strong>En espera <b>✦</b></strong>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -113,17 +138,20 @@
 
       <div class="game-hud">
         <div><span>PUNTOS</span><strong id="score">00</strong></div>
-        <div class="game-hud__message" id="gameMessage">Atrapa cada pulso de luz</div>
+        <div class="game-hud__message" id="gameMessage">Encuentra a la fugitiva</div>
         <div class="game-hud__time"><span>TIEMPO</span><strong id="time">30</strong></div>
       </div>
 
       <div class="arena" id="arena">
         <div class="arena__grid" aria-hidden="true"></div>
-        <button class="target" id="target" type="button" aria-label="Atrapar pulso"></button>
+        <div class="game-feedback" id="gameFeedback" role="status" aria-live="polite"></div>
+        <button class="target" id="target" type="button" aria-label="Atrapar a la ratita">
+          <img src="src/img/games/pulso/pulse-rat.png" alt="" aria-hidden="true">
+        </button>
         <div class="game-start" id="gameStart">
           <span class="game-start__icon">✦</span>
           <h2>Pulso</h2>
-          <p>Haz clic en la luz tantas veces como puedas antes de que termine el tiempo.</p>
+          <p>La ratita escapó del laboratorio. Encuéntrala tantas veces como puedas antes de que termine el tiempo.</p>
           <button type="button" id="startGame">Comenzar</button>
           <small>También puedes usar Tab + Enter</small>
         </div>
