@@ -51,7 +51,7 @@
       </div>
 
       <div class="game-grid">
-        <article class="game-card game-card--featured">
+        <a class="game-card game-card--featured" href="games/pulso/index.html" aria-label="Jugar Pulso">
           <div class="game-card__art" aria-hidden="true">
             <div class="planet"><span></span></div>
             <div class="orbit orbit--a"></div>
@@ -69,14 +69,14 @@
               <h3>Pulso</h3>
               <p>Encuentra a la ratita fugitiva antes de que vuelva a esconderse. Cada captura acelera el ritmo.</p>
             </div>
-            <button class="play-button" id="openGame" type="button">
+            <span class="play-button game-card__play">
               Jugar ahora
               <span aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 11 7-11 7V5Z"/></svg>
               </span>
-            </button>
+            </span>
           </div>
-        </article>
+        </a>
 
         <a class="game-card game-card--turno" href="games/turno-cero/dist/index.html" aria-label="Jugar Turno Cero: Laboratorio 13">
           <div class="turno-art" aria-hidden="true">
@@ -125,40 +125,5 @@
     <p>Diseñado y desarrollado por Good.</p>
   </footer>
 
-  <div class="game-modal" id="gameModal" aria-hidden="true">
-    <div class="game-modal__backdrop" data-close-game></div>
-    <section class="game-window" role="dialog" aria-modal="true" aria-labelledby="gameTitle">
-      <header class="game-window__bar">
-        <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="game-window__title"><i></i><span id="gameTitle">Pulso</span></div>
-        <button class="icon-button" type="button" data-close-game aria-label="Cerrar juego">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </header>
-
-      <div class="game-hud">
-        <div><span>PUNTOS</span><strong id="score">00</strong></div>
-        <div class="game-hud__message" id="gameMessage">Encuentra a la fugitiva</div>
-        <div class="game-hud__time"><span>TIEMPO</span><strong id="time">30</strong></div>
-      </div>
-
-      <div class="arena" id="arena">
-        <div class="arena__grid" aria-hidden="true"></div>
-        <div class="game-feedback" id="gameFeedback" role="status" aria-live="polite"></div>
-        <button class="target" id="target" type="button" aria-label="Atrapar a la ratita">
-          <img src="src/img/games/pulso/pulse-rat.png" alt="" aria-hidden="true">
-        </button>
-        <div class="game-start" id="gameStart">
-          <span class="game-start__icon">✦</span>
-          <h2>Pulso</h2>
-          <p>La ratita escapó del laboratorio. Encuéntrala tantas veces como puedas antes de que termine el tiempo.</p>
-          <button type="button" id="startGame">Comenzar</button>
-          <small>También puedes usar Tab + Enter</small>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <script src="src/js/games.js"></script>
 </body>
 </html>
