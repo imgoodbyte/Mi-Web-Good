@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Hover effect en interactivos
   const hoverTargets = document.querySelectorAll(
-    "a, button, .service__card, .project__card, .skill-tag",
+    "a, button, .service__card, .collaboration__card, .project__card, .skill-tag",
   );
   hoverTargets.forEach((el) => {
     el.addEventListener("mouseenter", () =>
@@ -157,6 +157,88 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==============================
+  // CARRUSEL DE COLABORACIONES
+  // ==============================
+  document.querySelectorAll("[data-collaboration-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector(".collaboration__track");
+    const slides = Array.from(
+      carousel.querySelectorAll("[data-collaboration-slide]"),
+    );
+    const controls = carousel.querySelector(".collaboration__controls");
+    const dotsWrap = carousel.querySelector(".collaboration__dots");
+    const counter = carousel.querySelector(".collaboration__counter");
+    const prevButton = carousel.querySelector(".collaboration__arrow--prev");
+    const nextButton = carousel.querySelector(".collaboration__arrow--next");
+
+    if (!track || slides.length === 0) return;
+
+    let currentSlide = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const dots = slides.map((slide, index) => {
+      slide.setAttribute("aria-roledescription", "diapositiva");
+      slide.setAttribute("aria-label", `${slide.getAttribute("aria-label") || "Empresa"}, ${index + 1} de ${slides.length}`);
+
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "collaboration__dot";
+      dot.setAttribute("aria-label", `Ver empresa ${index + 1}`);
+      dot.addEventListener("click", () => showSlide(index));
+      dotsWrap?.appendChild(dot);
+      return dot;
+    });
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      slides.forEach((slide, slideIndex) => {
+        const isInactive = slideIndex !== currentSlide;
+        slide.setAttribute("aria-hidden", String(isInactive));
+        slide.inert = isInactive;
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === currentSlide);
+        dot.setAttribute("aria-current", dotIndex === currentSlide ? "true" : "false");
+      });
+      if (counter) counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    if (slides.length > 1 && controls) {
+      controls.hidden = false;
+      prevButton?.addEventListener("click", () => showSlide(currentSlide - 1));
+      nextButton?.addEventListener("click", () => showSlide(currentSlide + 1));
+
+      carousel.setAttribute("tabindex", "0");
+      carousel.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") showSlide(currentSlide - 1);
+        if (event.key === "ArrowRight") showSlide(currentSlide + 1);
+      });
+
+      carousel.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartX = event.changedTouches[0].clientX;
+        },
+        { passive: true },
+      );
+      carousel.addEventListener(
+        "touchend",
+        (event) => {
+          touchEndX = event.changedTouches[0].clientX;
+          const distance = touchEndX - touchStartX;
+          if (Math.abs(distance) < 45) return;
+          showSlide(distance > 0 ? currentSlide - 1 : currentSlide + 1);
+        },
+        { passive: true },
+      );
+    }
+
+    showSlide(0);
+  });
+
+  // ==============================
   // BACK TO TOP
   // ==============================
   const btnTop = document.getElementById("btnTop");
@@ -179,33 +261,83 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
 
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const btn = contactForm.querySelector('button[type="submit"]');
       const span = btn.querySelector("span");
+      const initialText = "Enviar mensaje";
 
       // Estado loading
       btn.disabled = true;
       span.textContent = "Enviando...";
       btn.style.opacity = "0.7";
 
-      // Simular envío (reemplazar con tu lógica real)
-      setTimeout(() => {
-        span.textContent = "¡Mensaje enviado! ✓";
+      try {
+        const formData = new FormData(contactForm);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        let response;
+
+        try {
+          response = await fetch(
+            window.GOOD_CONFIG?.contactApiUrl || "/api/contact",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: formData.get("name"),
+                email: formData.get("email"),
+                message: formData.get("message"),
+                website: formData.get("website"),
+              }),
+              signal: controller.signal,
+            },
+          );
+        } finally {
+          clearTimeout(timeoutId);
+        }
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const apiError = new Error(
+            result.message || "No se pudo enviar el mensaje.",
+          );
+          apiError.isContactApiError = true;
+          throw apiError;
+        }
+
+        span.textContent = result.message || "¡Mensaje enviado! ✓";
         btn.style.background = "#16A34A";
         btn.style.boxShadow = "0 4px 24px rgba(22, 163, 74, 0.4)";
+        contactForm.reset();
 
-        // Reset después de 3s
         setTimeout(() => {
-          contactForm.reset();
-          span.textContent = "Enviar mensaje";
+          span.textContent = initialText;
           btn.disabled = false;
           btn.style.opacity = "";
           btn.style.background = "";
           btn.style.boxShadow = "";
         }, 3000);
-      }, 1500);
+      } catch (error) {
+        span.textContent =
+          error.name === "AbortError"
+            ? "El envío tardó demasiado. Intenta otra vez."
+            : error.isContactApiError
+              ? error.message
+              : "No se pudo conectar. Intenta otra vez.";
+        btn.style.background = "#DC2626";
+        btn.style.boxShadow = "0 4px 24px rgba(220, 38, 38, 0.35)";
+
+        setTimeout(() => {
+          span.textContent = initialText;
+          btn.disabled = false;
+          btn.style.opacity = "";
+          btn.style.background = "";
+          btn.style.boxShadow = "";
+        }, 4000);
+      }
     });
   }
 
